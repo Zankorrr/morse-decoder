@@ -38,7 +38,34 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let result = ""
+    let x = 1
+    for(let i = 0; i < (expr.length / 2); i++) {
+        let charInBinary = expr.substr(10 * i, 10)
+        if(charInBinary == "**********") {
+            result += " "
+            continue
+        } else {
+            let word = ""
+            for(let n = 0; n < (charInBinary.length / 2); n++) {
+                let char = ""
+                let charInMorse = charInBinary.substr(2 * n, 2)
+                switch(charInMorse){
+                    case "10":
+                        char += "."
+                        break
+                    case "11":
+                        char += "-"
+                        break
+                }
+                word += char
+            }
+            if(word) {
+                result += MORSE_TABLE[word]
+            }
+        }
+    }
+    return result
 }
 
 module.exports = {
